@@ -9,6 +9,18 @@
 
 using namespace std;
 
+void test_print(float **array, int width, int height) {
+    int i = 0;
+    int j = 0;
+
+    for (j = 0; j < height; j++) {
+        for (i = 0; i < width; i++) {
+            cout << array[j][i] << "   |    ";
+        }
+        cout << endl;
+    }
+}
+
 int main(int argc, char **argv) {
     int maxMatrixLength = 1000;
     int maxKernelLength = 9;
@@ -65,28 +77,19 @@ int main(int argc, char **argv) {
     kernelHeight = j;
     //Read in matrix from file======================================
 
-    //test print
-    for (j = 0; j < inputHeight; j++) {
-        for (i = 0; i < inputWidth; i++) {
-            printf("%g   |   ", inputArr[j][i]);
-            //cout << inputArr[j][i] << "   |    ";
-        }
-        cout << endl;
-    }
+    //test print====================================================
+    test_print(inputArr, inputWidth, inputHeight);
+    test_print(kernelArr, kernelWidth, kernelHeight);
+    //test print====================================================
 
-    cout << endl;
+    //TODO: 2D-Convolution Sequential
+    //Sequential 2D-Convolution=====================================
 
-    for (j = 0; j < kernelHeight; j++) {
-        for (i = 0; i < kernelWidth; i++) {
-            cout << kernelArr[j][i] << "   |    ";
-        }
-        cout << endl;
-    }
-    //test print
+    //Sequential 2D-Convolution=====================================
+    //TODO: 2D-Convolution GPU
+    //GPU 2D-Convolution============================================
 
-    //TODO: 2D-Convolution
-
-    //TODO: 2D-Convolution
+    //GPU 2D-Convolution============================================
 
     //Delete arrays=================================================
     for (int i = 0; i < maxMatrixLength; ++i) {
