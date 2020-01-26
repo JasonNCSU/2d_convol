@@ -9,6 +9,10 @@
 
 using namespace std;
 
+void sequential_convolution(float **inputArr, int inputWidth, int inputHeight, float **kernelArr, int kernelWidth, int kernelHeight, float **outputArr) {
+    int temp = 0;
+}
+
 void test_print(float **array, int width, int height) {
     int i = 0;
     int j = 0;
@@ -77,6 +81,16 @@ int main(int argc, char **argv) {
     kernelHeight = j;
     //Read in matrix from file======================================
 
+    //Initialize output array=======================================
+    int outputWidth = inputWidth + (kernelWidth - 1);
+    int outputHeight = inputHeight + (kernelHeight - 1);
+
+    float **outputArr = new float*[outputHeight];
+    for (int i = 0; i < outputHeight; ++i) {
+        kernelArr[i] = new float[outputWidth];
+    }
+    //Initialize output array=======================================
+
     //test print====================================================
     test_print(inputArr, inputWidth, inputHeight);
     test_print(kernelArr, kernelWidth, kernelHeight);
@@ -84,7 +98,7 @@ int main(int argc, char **argv) {
 
     //TODO: 2D-Convolution Sequential
     //Sequential 2D-Convolution=====================================
-
+    sequential_convolution(inputArr, inputWidth, inputHeight, kernelArr, kernelWidth, kernelHeight, outputArr);
     //Sequential 2D-Convolution=====================================
     //TODO: 2D-Convolution GPU
     //GPU 2D-Convolution============================================
