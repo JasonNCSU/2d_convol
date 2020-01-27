@@ -9,15 +9,16 @@
 
 using namespace std;
 
-void sequential_convolution(float **inputArr, int inputWidth, int inputHeight, float **kernelArr, int kernelWidth, int kernelHeight, float **outputArr) {
+void sequential_convolution(double **inputArr, int inputWidth, int inputHeight, double **kernelArr, int kernelWidth, int kernelHeight, double **outputArr) {
     int temp = 0;
 }
 
-void test_print(float **array, int width, int height) {
+void test_print(double **array, int width, int height) {
     int i = 0;
     int j = 0;
 
     for (j = 0; j < height; j++) {
+        printf("row %d", j);
         for (i = 0; i < width; i++) {
             cout << array[j][i] << "   |    ";
         }
@@ -34,14 +35,14 @@ int main(int argc, char **argv) {
     int kernelHeight = 0;
 
     //Initialize arrays for holding all of the file values==========
-    float **inputArr = new float*[maxMatrixLength];
+    double **inputArr = new double*[maxMatrixLength];
     for (int i = 0; i < maxMatrixLength; ++i) {
-        inputArr[i] = new float[maxMatrixLength];
+        inputArr[i] = new double[maxMatrixLength];
     }
 
-    float **kernelArr = new float*[maxKernelLength];
+    double **kernelArr = new double*[maxKernelLength];
     for (int i = 0; i < maxKernelLength; ++i) {
-        kernelArr[i] = new float[maxKernelLength];
+        kernelArr[i] = new double[maxKernelLength];
     }
     //Initialize arrays for holding all of the file values==========
 
@@ -52,7 +53,7 @@ int main(int argc, char **argv) {
     int i = 0;
     int j = 0;
     bool k = false;
-    float num;
+    double num;
 
     string line;
     ifstream input(trace_file);
@@ -64,9 +65,9 @@ int main(int argc, char **argv) {
             j = 0; //reset to the first row
         }
         else {
-            istringstream stream(line); //line will be streamed, one number at a time
+            stringstream stream(line); //line will be streamed, one number at a time
             i = 0; //resets to first column after finishing the row
-            while(stream >> num) { //each number is put into the float 'num'
+            while(stream >> num) { //each number is put into the double 'num'
                 if (!k) { //which matrix are we dealing with
                     inputArr[j][i] = num;
                 } else {
@@ -85,9 +86,9 @@ int main(int argc, char **argv) {
     int outputWidth = inputWidth + (kernelWidth - 1);
     int outputHeight = inputHeight + (kernelHeight - 1);
 
-    float **outputArr = new float*[outputHeight];
+    double **outputArr = new double*[outputHeight];
     for (int i = 0; i < outputHeight; ++i) {
-        kernelArr[i] = new float[outputWidth];
+        kernelArr[i] = new double[outputWidth];
     }
     //Initialize output array=======================================
 
@@ -106,12 +107,12 @@ int main(int argc, char **argv) {
     //GPU 2D-Convolution============================================
 
     //Delete arrays=================================================
-    for (int i = 0; i < maxMatrixLength; ++i) {
+    for (i = 0; i < maxMatrixLength; ++i) {
         delete [] inputArr[i];
     }
     delete [] inputArr;
 
-    for (int i = 0; i < maxKernelLength; ++i) {
+    for (i = 0; i < maxKernelLength; ++i) {
         delete [] kernelArr[i];
     }
     delete [] kernelArr;
