@@ -13,17 +13,18 @@ void sequential_convolution(double **inputArr, int inputWidth, int inputHeight, 
     int temp = 0;
 }
 
-void test_print(double **array, int width, int height) {
+void print(double **array, int width, int height) {
     int i = 0;
     int j = 0;
 
     for (j = 0; j < height; j++) {
-        printf("row %d", j);
+        printf("row %d: ", j);
         for (i = 0; i < width; i++) {
-            cout << array[j][i] << "   |    ";
+            printf("%.3f | ", array[j][i]);
         }
-        cout << endl;
+        printf("\n");
     }
+    printf("\n");
 }
 
 int main(int argc, char **argv) {
@@ -88,13 +89,13 @@ int main(int argc, char **argv) {
 
     double **outputArr = new double*[outputHeight];
     for (int i = 0; i < outputHeight; ++i) {
-        kernelArr[i] = new double[outputWidth];
+        outputArr[i] = new double[outputWidth];
     }
     //Initialize output array=======================================
 
     //test print====================================================
-    test_print(inputArr, inputWidth, inputHeight);
-    test_print(kernelArr, kernelWidth, kernelHeight);
+    print(inputArr, inputWidth, inputHeight);
+    print(kernelArr, kernelWidth, kernelHeight);
     //test print====================================================
 
     //TODO: 2D-Convolution Sequential
